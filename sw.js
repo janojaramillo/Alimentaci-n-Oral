@@ -3,7 +3,7 @@
    Sirve igual para cualquier app de la suite: solo cambie VERSION
    cada vez que suba un index.html nuevo.
    ===================================================================== */
-const VERSION = "1.2.0";
+const VERSION = "1.3.0";
 const SCOPE = new URL(self.registration.scope).pathname;          // p. ej. /enteral/
 const CACHE = "cdss" + SCOPE.replace(/\W+/g, "-") + "v" + VERSION; // caché propio de cada repositorio
 const HOME = SCOPE + "index.html";

@@ -121,7 +121,8 @@ table.t thead th{background:var(--cocoa);color:var(--cream)}
 table.t thead th:first-child{background:var(--cocoa)}
 table.t tr.mefr td{color:var(--muted);font-style:italic}
 table.t tr.hl td{background:rgba(181,80,47,.12)}
-table.t.wrap td{white-space:normal;text-align:left}
+table.t.wrap td{white-space:normal;text-align:left;font-family:var(--sans);font-size:13px;line-height:1.4;vertical-align:top}
+table.t.wrap td:first-child{font-family:var(--mono);font-size:12px;white-space:nowrap}
 table.t td.sum{color:var(--terra);font-weight:600}
 .bar{height:10px;border-radius:99px;background:var(--line);position:relative;overflow:hidden;margin:6px 0 2px}
 .bar .tg{position:absolute;top:0;bottom:0;background:rgba(47,125,91,.28)}
@@ -183,7 +184,7 @@ footer.sigf{text-align:center;font-size:11.5px;color:var(--muted);margin:22px 0 
 </div>
 
 <header>
-  <h1>Gota a Gota<small>v1.2</small></h1>
+  <h1>Gota a Gota<small>v1.3</small></h1>
   <span class="dot" id="netd" title="conexión"></span>
   <button class="hb" id="thm" aria-label="Tema">◐</button>
   <button class="hb" id="showcover">Carátula</button>
@@ -271,6 +272,43 @@ footer.sigf{text-align:center;font-size:11.5px;color:var(--muted);margin:22px 0 
 
 <!-- ============ NUTRIENTES ============ -->
 <section class="tab" id="t-nut">
+  <div class="card" id="fz">
+    <h2>¿Fortificar?</h2>
+    <div class="grid2">
+      <label class="f">Peso al nacer (g)<input id="fbw" type="number" inputmode="numeric" min="300" max="5000" step="10"></label>
+      <label class="f">Edad gestacional al nacer (sem)<input id="fga" type="number" inputmode="decimal" min="22" max="42" step="0.1"></label>
+      <label class="f">Volumen enteral actual (mL/kg/d)<input id="fvol" type="number" inputmode="numeric" min="0" max="220" step="5"></label>
+      <label class="f">Fortificación actual<select id="fcur"><option value="0">Sin fortificar</option><option value="50">1 sobre / 50 mL</option><option value="25">1 sobre / 25 mL</option></select></label>
+    </div>
+    <h3>1 · Indicación</h3>
+    <div id="find"></div>
+    <div id="fextra" style="display:none">
+      <div class="small" style="margin:4px 0 2px">Fuera del grupo de rutina, ¿hay alguna razón individual?</div>
+      <label class="chk"><input type="checkbox" data-x="rciu">PEG o RCIU</label>
+      <label class="chk"><input type="checkbox" data-x="dhm">Alimentado con leche donada (menos proteína)</label>
+      <label class="chk"><input type="checkbox" data-x="fluid">Restricción de líquidos (DBP, cardiopatía, DAP)</label>
+      <label class="chk"><input type="checkbox" data-x="grow">Crecimiento insuficiente (&lt; 15 g/kg/d o caída del puntaje z)</label>
+      <label class="chk"><input type="checkbox" data-x="lab">Urea baja o fósforo bajo / fosfatasa alcalina alta</label>
+    </div>
+    <h3>2 · Criterios para diferir o suspender</h3>
+    <label class="chk"><input type="checkbox" data-d="hd">Inestabilidad hemodinámica o soporte vasoactivo</label>
+    <label class="chk"><input type="checkbox" data-d="int">Intolerancia activa o sospecha de ECN / lesión intestinal</label>
+    <label class="chk"><input type="checkbox" data-d="post">Reinicio de la alimentación después de un episodio de ECN</label>
+    <label class="chk"><input type="checkbox" data-d="dop">RCIU grave con Doppler umbilical diastólico ausente o reverso</label>
+    <div id="fver"></div>
+    <h3>3 · Laboratorio de control</h3>
+    <p class="small" style="margin:0 0 6px">Mientras reciba leche fortificada: cada 1–2 semanas desde las 2 semanas de vida, o 1–2 semanas después de llegar a fortificación plena. Valores de referencia orientativos; ajuste a su laboratorio.</p>
+    <div class="tw"><table class="t wrap"><thead><tr><th>Prueba</th><th>Qué buscar → qué hacer</th></tr></thead><tbody>
+      <tr><td>Urea (BUN)</td><td>BUN &lt; 9–10 mg/dL con buena función renal: proteína insuficiente → subir proteína (fortificación ajustable). BUN alto (&gt; ~20 mg/dL) sin deshidratación: posible exceso → revisar aporte.</td></tr>
+      <tr><td>Fósforo</td><td>&lt; 5,5 mg/dL (1,8 mmol/L): aporte insuficiente → suplementar fósforo.</td></tr>
+      <tr><td>Fosfatasa alcalina</td><td>&gt; 500 UI/L: vigilar. &gt; 800–900 UI/L con fósforo bajo: enfermedad metabólica ósea probable → radiografía de muñeca o rodilla y suplementación.</td></tr>
+      <tr><td>Calcio</td><td>Hipercalcemia con fósforo bajo: déficit de fósforo, no exceso de calcio.</td></tr>
+      <tr><td>Sodio</td><td>&lt; 133–135 mmol/L: suplementar sodio (la leche humana fortificada puede no cubrir 3–5 mmol/kg/d).</td></tr>
+      <tr><td>Gasometría / bicarbonato</td><td>Si hay acidosis metabólica inexplicada, sobre todo con fortificador líquido acidificado.</td></tr>
+      <tr><td>Hb y ferritina</td><td>Hierro 2–3 mg/kg/d desde las 2–6 semanas (ESPGHAN); ajustar por ferritina y transfusiones.</td></tr>
+      <tr><td>Crecimiento</td><td>Peso diario o ≥ 3 veces/semana: meta 15–20 g/kg/d. Longitud y perímetro cefálico semanales (≈ 1 cm/semana). Graficar en Fenton o INTERGROWTH-21st.</td></tr>
+    </tbody></table></div>
+  </div>
   <div class="card">
     <h2>Energía y proteína</h2>
     <div class="grid2">
@@ -335,6 +373,7 @@ footer.sigf{text-align:center;font-size:11.5px;color:var(--muted);margin:22px 0 
   <div class="card"><h2>Dónde el protocolo y la evidencia coinciden — y dónde no</h2><div id="diff"></div></div>
   <div class="card"><h2>Evidencia</h2><div id="evl"></div></div>
   <div class="card"><h2>Registro de versiones</h2>
+    <div class="ev"><b>v1.3 · 11 nov 2026</b><p>Panel «¿Fortificar?» en Nutrientes: indicación por peso al nacer y EG (rutina &lt; 1800 g o &lt; 32 sem; individual por encima), momento de inicio según el volumen, criterios para diferir o suspender y laboratorio de control. Se agregan Cochrane 2020 (fortificación y momento de inicio) y N-forte 2024.</p></div>
     <div class="ev"><b>v1.2 · 9 nov 2026</b><p>Adaptación a la Sala de Neonatología del Hospital Dr. Cecilio Castillero: alimentación cada 3 h en bolo por gravedad por defecto. Las tablas de Winnipeg cada 2 h (500–1249 g) se convierten a 8 tomas/día conservando el volumen diario; el original sigue disponible. Se agregan la técnica de administración, el cuidado de la leche, la escalera ante intolerancia y dos revisiones Cochrane 2021.</p></div>
     <div class="ev"><b>v1.1</b><p>Ícono en PNG y manifiesto dentro del archivo; sin fuentes externas; service worker que no se queda cargando.</p></div>
     <div class="ev"><b>v1.0 · 9 nov 2026</b><p>Versión inicial: tablas de HSC Winnipeg (500–2249 g, 7 bandas), esquema por regla para las bandas faltantes, calculadora de energía/proteína con HMF, semáforo de tolerancia y revisión de evidencia hasta FEED1 (2025) y el protocolo neoGASTRIC (2026).</p></div>
@@ -495,6 +534,7 @@ function renderPlan(){
   const f=$("#feed1");
   f.innerHTML=(S.ga>=30&&S.ga<33&&S.w>=1000)?`<div class="infobox"><b>Opción con evidencia — FEED1 (2025):</b> en RN estables de 30<sup>+0</sup>–32<sup>+6</sup> sem se puede iniciar leche completa el día 1 (60–80 mL/kg/d) sin NPT. No acortó la estancia, pero tampoco aumentó ECN ni hipoglucemia, y redujo vías IV y días de nutrición parenteral. Requiere leche suficiente (propia o donada) y monitoreo de glucemia.</div>`:"";
   $("#nv").value=Math.round(perkg);
+  if($("#fvol")){ $("#fvol").value=Math.round(perkg); if(!S.bw) $("#fbw").value=S.w; if(!S.fga) $("#fga").value=S.ga; renderFz(); }
   renderNut();
 }
 
@@ -515,6 +555,39 @@ function renderTables(){
   $("#tnotes").innerHTML=Object.entries(b.fn).map(([k,v])=>`<div class="ms"><div class="ic">${k}</div><div>${v[0]}<span class="en">${v[1]}</span></div></div>`).join("")+`<p class="small">* La hoja no fija el volumen de la MEF; 10–20 mL/kg/d es el rango habitual (ESPGHAN 2022; guías escocesas 12–24).</p>`;
 }
 
+
+/* ===== ¿Fortificar? ===== */
+function renderFz(){
+  const bw=+$("#fbw").value||0, ga=+$("#fga").value||0, vol=+$("#fvol").value||0, cur=+$("#fcur").value;
+  const milk=S.milk, fmla=milk==="frm";
+  const routine=bw>0&&(bw<1800||(ga>0&&ga<32));
+  const big=bw>=2500&&ga>=34;
+  const extra=$$("#fextra input:checked").map(x=>x.dataset.x);
+  let ind, cls, indicated=false;
+  if(fmla){ind="Alimentado con fórmula: el HMF no se usa. Si no hay leche humana, use fórmula de prematuro con la densidad adecuada.";cls="infobox"}
+  else if(routine){indicated=true;cls="okbox";ind=`<b>Indicada de rutina.</b> ${bw<1800?`Peso al nacer ${f0(bw)} g (&lt; 1800 g, ESPGHAN 2022)`:`EG ${String(ga).replace(".",",")} sem (&lt; 32 sem)`}. Toda la leche humana debe fortificarse.`}
+  else if(extra.length){indicated=true;cls="okbox";ind=`<b>Indicación individual.</b> No pertenece al grupo de rutina, pero hay razones para fortificar: ${extra.map(x=>({rciu:"PEG/RCIU",dhm:"leche donada",fluid:"restricción de líquidos",grow:"crecimiento insuficiente",lab:"laboratorio alterado"}[x])).join(", ")}. Reevalúe al normalizarse el crecimiento.`}
+  else {cls="infobox";ind=big?`<b>No indicada.</b> ≥ 2500 g y ≥ 34 sem: la leche humana sola suele bastar. Vigile el crecimiento.`:`<b>No de rutina</b> (≥ 1800 g y ≥ 32 sem). Fortifique solo si hay una razón individual.`}
+  $("#find").innerHTML=`<div class="${cls}">${ind}</div>`;
+  $("#fextra").style.display=(!fmla&&!routine)?"block":"none";
+  const d=$$("#fz input[data-d]:checked").map(x=>x.dataset.d);
+  let v="";
+  if(fmla) v="";
+  else if(d.includes("int")) v=`<div class="light" style="background:var(--bad)"><h4>Suspender toda la alimentación</h4>Ante intolerancia activa o sospecha de ECN no se diferencia leche sola de fortificada: ayuno y evaluación (pestaña Tolerancia y CDSS de lesión intestinal).</div>`;
+  else if(d.includes("hd")) v=`<div class="light" style="background:var(--warn)"><h4>Diferir la fortificación</h4>Con inestabilidad hemodinámica o vasoactivos, mantenga la leche sin fortificar (o la MEF) y reevalúe cuando esté estable. Criterio de prudencia, sin ensayos que lo definan.</div>`;
+  else if(d.includes("post")) v=`<div class="light" style="background:var(--warn)"><h4>Reiniciar sin fortificar</h4>Tras una ECN, avance primero con leche humana sin HMF y fortifique cuando tolere volúmenes intermedios (≈ 100 mL/kg/d), según el protocolo de su servicio.</div>`;
+  else if(indicated){
+    const dop=d.includes("dop")?`<br><b>Doppler alterado:</b> avance el volumen con más cautela; no hay evidencia de que deba retrasarse el HMF en sí.`:"";
+    let step;
+    if(cur===25) step=`Ya en fortificación plena (1:25). Siga con el laboratorio de control; si el crecimiento o la urea quedan bajos, considere proteína adicional (fortificación ajustable).`;
+    else if(cur===50) step=`En 1:50. Si tolera 24–48 h, suba a 1 sobre por 25 mL.`;
+    else if(vol>=100) step=`<b>Ya debería estar fortificada</b> (≥ 100 mL/kg/d). Inicie hoy con 1 sobre por 50 mL y suba a 1:25 en 24–48 h si tolera.`;
+    else if(vol>=40) step=`Puede iniciar ya: 1 sobre por 50 mL y subir a 1:25 en 24–48 h. Iniciar entre 20–40 y 100 mL/kg/d no aumentó la ECN (Cochrane 2020). Con el esquema de Winnipeg, se fortifica al día 3 del avance.`;
+    else step=`Volumen aún bajo (${f0(vol)} mL/kg/d). Inicie antes de llegar a 100 mL/kg/d; los ensayos fortificaron desde 20–40 mL/kg/d sin más ECN. Con el esquema de Winnipeg, al día 3 del avance.`;
+    v=`<div class="light" style="background:var(--ok)"><h4>Fortificar</h4>${step}${dop}</div>`;
+  } else if(d.includes("dop")) v=`<div class="infobox">Doppler alterado: avance el volumen con cautela.</div>`;
+  $("#fver").innerHTML=v;
+}
 /* ===== Nutrientes ===== */
 let NH=4;
 function renderNut(){
@@ -584,6 +657,9 @@ const EV=[
  ["Calostro orofaríngeo","MA 2024","21 estudios, 2393 RN: menos sepsis confirmada (RR 0,78), mortalidad (RR 0,73) y ECN (RR 0,59).","Anne RP et al. J Pediatr Gastroenterol Nutr 2024;78:471-87."],
  ["Intervalo 2 h vs 3 h","Cochrane 2021","4 ECA, 417 RN muy prematuros: sin diferencia en tiempo a volumen pleno (−0,6 d; NS), ECN, intolerancia ni hipoglucemia; quizá ~1 día más para recuperar el peso al nacer con cada 2 h. Certeza baja.","Ibrahim NR et al. Cochrane Database Syst Rev 2021;8:CD012322."],
  ["Continua vs bolo","Cochrane 2021","En < 1500 g, la alimentación continua no acorta el tiempo a volumen pleno ni reduce la ECN frente al bolo intermitente. Certeza baja.","Premji SS et al. Cochrane Database Syst Rev 2021;6:CD001819."],
+ ["Fortificar vs no fortificar","Cochrane 2020","18 ECA, 1456 RN: más ganancia de peso (+1,8 g/kg/d), talla y perímetro cefálico en el hospital. ECN RR 1,37 (IC 0,72–2,63): sin diferencia demostrada; certeza baja.","Brown JVE et al. Cochrane Database Syst Rev 2020;6:CD000343."],
+ ["Fortificación temprana vs tardía","Cochrane 2020","2 ECA, 237 RNMBP: iniciar a 20–40 mL/kg/d frente a 100 mL/kg/d no cambió ECN, ECN quirúrgica ni infección. Certeza baja.","Thanigainathan S, Abiramalatha T. Cochrane Database Syst Rev 2020;7:CD013392."],
+ ["N-forte","ECA 2024","Extremadamente prematuros con leche humana exclusiva: el fortificador de leche humana no redujo ECN, sepsis ni muerte frente al bovino.","Jensen GB et al. EClinicalMedicine 2024."],
  ["GRASS","ECA 2024","Omitir la medición rutinaria del residuo gástrico en RNMBP no causó daño ni retrasó el volumen pleno.","Branagan A et al. Eur J Pediatr 2024;183:2325-32."],
  ["neoGASTRIC","Protocolo 2026","ECA de ≈ 7000 RN < 34 sem (Reino Unido/Australia) sobre no medir residuos de rutina. Resultados pendientes.","Nuthall E et al. Trials 2026."],
  ["Fortificación temprana","ECA 2023","En extremadamente prematuros, fortificar desde el día 2 mejoró talla y perímetro cefálico sin aumentar masa grasa.","Salas AA et al. Pediatrics 2023."],
@@ -609,6 +685,12 @@ $("#nm").value=S.milk;
 $$("#nh button").forEach(b=>b.onclick=()=>{NH=+b.dataset.v;$$("#nh button").forEach(x=>x.classList.toggle("on",x===b));renderNut()});
 ["nv","hk","hp","pv"].forEach(id=>$("#"+id).oninput=renderNut);$("#nm").onchange=renderNut;
 $("#tsel").onchange=renderTables;
+$("#fbw").value=S.bw||S.w; $("#fga").value=S.fga||S.ga; $("#fvol").value=Math.round(+$("#nv").value||0);
+$("#fbw").oninput=e=>{S.bw=+e.target.value;save();renderFz()};
+$("#fga").oninput=e=>{S.fga=+e.target.value;save();renderFz()};
+$("#fvol").oninput=renderFz; $("#fcur").onchange=renderFz;
+$$("#fz input[type=checkbox]").forEach(x=>x.onchange=renderFz);
+$("#nm").addEventListener("change",renderFz);
 function ivUI(){$$(".ivsel button").forEach(x=>x.classList.toggle("on",+x.dataset.v===(S.iv||3)))}
 $$(".ivsel button").forEach(x=>x.onclick=()=>{S.iv=+x.dataset.v;ivUI();save();renderPlan();renderTables()});ivUI();
 /* tema */
